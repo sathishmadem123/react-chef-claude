@@ -3,29 +3,27 @@ import ReactMarkDown from 'react-markdown'
 
 export default function Recipe(props) {
 
-    const [fullText, setFullText] = React.useState(props.recipe);
+    // const [fullText, setFullText] = React.useState(props.recipe);
     const [visibleText, setVisibleText] = React.useState("");
 
-    console.log(props.recipe)
-
     React.useEffect(() => {
-        if (!fullText) return;
+        if (!props.recipe) return;
 
         let index = 0;
         setVisibleText("");
 
         const interval = setInterval(() => {
-            if (index >= (fullText.length-1)) {
+            if (index >= (props.recipe.length-1)) {
                 clearInterval(interval);
                 return;
             }
 
-            setVisibleText(prev => prev + fullText[index]);
+            setVisibleText(prev => prev + props.recipe[index]);
             index++;
         }, 0);
 
         return () => clearInterval(interval);
-    }, [fullText]);
+    }, [props.recipe]);
 
     return (
         <section>
